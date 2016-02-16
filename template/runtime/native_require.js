@@ -8,9 +8,11 @@ var game_file_list = [
 	"libs/modules/game/game.native.js",
 	"libs/modules/tween/tween.js",
 	"libs/modules/res/res.js",
+	"bin-debug/BgMap.js",
 	"bin-debug/Bird.js",
 	"bin-debug/LoadingUI.js",
 	"bin-debug/Main.js",
+	"bin-debug/util/GameUtil.js",
 	//----auto game_file_list end----
 ];
 
@@ -38,7 +40,7 @@ egret_native.egretStart = function () {
     var option = {
         //以下为自动修改，请勿修改
         //----auto option start----
-		entryClassName: "Main",
+		entryClassName: "bird.Main",
 		frameRate: 30,
 		scaleMode: "showAll",
 		contentWidth: 480,
