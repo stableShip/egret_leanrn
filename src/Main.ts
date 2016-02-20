@@ -1,4 +1,5 @@
-module bird {
+module flappy_bird {
+    import tr = egret.sys.tr;
     export class Main extends egret.DisplayObjectContainer {
 
         private loadingView:LoadingUI;
@@ -9,7 +10,11 @@ module bird {
 
         private stageH:number;
 
-        private bg:bird.BgMap;
+        private bg:flappy_bird.BgMap;
+
+        private wall:flappy_bird.WallMap;
+
+        private bird:flappy_bird.Bird;
 
         public constructor() {
             super();
@@ -112,7 +117,6 @@ module bird {
             this.btnStart.addEventListener(egret.TouchEvent.TOUCH_TAP, this.gameStart, this);
             this.addChild(this.btnStart);
 
-
         }
 
 
@@ -132,15 +136,42 @@ module bird {
             this.bg = new BgMap();//创建可滚动的背景
             this.addChild(this.bg);
             this.bg.start();
-            //////设置小鸟在屏幕中间
-            var bird:egret.Bitmap = new Bird("birdie_png");
-            this.addChild(bird);
-            bird.x = this.stageW / 2;
-            bird.y = this.stageH / 2;
-            bird.touchEnabled = true; //开启触碰
-
+            ////设置小鸟在屏幕中间
+            this.bird = new Bird("birdie_png");
+            this.addChild(this.bird);
+            this.bird.x = this.stageW / 5;
+            this.bird.y = this.stageH / 2;
+            //this.bird.touchEnabled = true; //开启触碰
+            this.wall = new WallMap();
+            this.addChildAt(this.wall, 1);
+            this.touchEnabled = true;
+            this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.fly, this);
+            this.addEventListener(egret.Event.ENTER_FRAME, this.fall, this);
         }
 
+        private fly():void {
+            this.bird.isFall = false;
+            var isFlyOff = this.bird.y > 0;
+            if (isFlyOff) {
+                this.removeEventListener(egret.Event.ENTER_FRAME, this.fall, this);
+                var y:number = this.bird.y - 30;
+                var tw = egret.Tween.get(this.bird);
+                tw.to({x: this.bird.x, y: y}, 50);
+
+            }
+            this.bird.isFall = true;
+            this.addEventListener(egret.Event.ENTER_FRAME, this.fall, this);
+        }
+
+        private fall():void {
+            var isFlyOff = this.bird.y < (this.stageH - this.bird.height);
+            if (isFlyOff && this.bird.isFall) {
+                this.bird.rotation = 0;
+                var tw = egret.Tween.get(this.bird);
+                var y:number = this.bird.y + 3;
+                tw.to({x: this.bird.x, y: y}, 50);
+            }
+        }
 
     }
 }

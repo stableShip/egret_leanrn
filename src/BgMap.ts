@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2016/2/16.
  */
-module bird {
+module flappy_bird {
     /**
      * 可滚动的底图
      */
@@ -14,7 +14,7 @@ module bird {
         private stageW:number;
         /**stage高*/
         private stageH:number;
-        /**纹理本身的高度*/
+        /**纹理本身的宽度*/
         private textureWidth:number;
         /**控制滚动速度*/
         private speed:number = 2;
@@ -36,7 +36,7 @@ module bird {
             this.bmpArr = [];
             //创建这些图片，并设置x坐标，让它们连接起来
             for (var i:number = 0; i < this.rowCount; i++) {
-                var bgBmp:egret.Bitmap = bird.createBitmapByName("fence_png");
+                var bgBmp:egret.Bitmap = flappy_bird.createBitmapByName("fence_png");
                 bgBmp.x = this.textureWidth * i - (this.textureWidth * this.rowCount - this.stageW);
                 bgBmp.y = this.stageH - textureHeight;
                 this.bmpArr.push(bgBmp);
@@ -60,6 +60,7 @@ module bird {
                     this.bmpArr.shift()
                     bgBmp.x = this.bmpArr[this.bmpArr.length-1].x + this.textureWidth;
                     this.bmpArr.push(bgBmp)
+
                 }
             }
         }

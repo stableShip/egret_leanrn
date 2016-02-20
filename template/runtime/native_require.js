@@ -13,6 +13,7 @@ var game_file_list = [
 	"bin-debug/LoadingUI.js",
 	"bin-debug/Main.js",
 	"bin-debug/util/GameUtil.js",
+	"bin-debug/WallMap.js",
 	//----auto game_file_list end----
 ];
 
@@ -40,11 +41,11 @@ egret_native.egretStart = function () {
     var option = {
         //以下为自动修改，请勿修改
         //----auto option start----
-		entryClassName: "bird.Main",
+		entryClassName: "flappy_bird.Main",
 		frameRate: 30,
 		scaleMode: "showAll",
-		contentWidth: 480,
-		contentHeight: 800,
+		contentWidth: 600,
+		contentHeight: 1000,
 		showPaintRect: false,
 		showFPS: false,
 		fpsStyles: "x:0,y:0,size:30,textColor:0x00c200,bgAlpha:0.9",

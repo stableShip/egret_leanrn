@@ -26,7 +26,7 @@
 //  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 //////////////////////////////////////////////////////////////////////////////////////
-module bird {
+module flappy_bird {
     export class LoadingUI extends egret.Sprite {
 
         public constructor() {

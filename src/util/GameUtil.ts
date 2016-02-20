@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2016/2/16.
  */
-module bird {
+module flappy_bird {
     export class GameUtil {
         /**基于矩形的碰撞检测*/
         public static hitTest(obj1:egret.DisplayObject, obj2:egret.DisplayObject):boolean {
