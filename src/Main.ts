@@ -12,7 +12,7 @@ module flappy_bird {
 
         private bg:flappy_bird.BgMap;
 
-        private wall:flappy_bird.WallMap;
+        private walls:flappy_bird.WallMap;
 
         private bird:flappy_bird.Bird;
 
@@ -91,7 +91,6 @@ module flappy_bird {
             }
         }
 
-        private textfield:egret.TextField;
 
         /**
          * 创建游戏场景
@@ -142,9 +141,10 @@ module flappy_bird {
             this.bird.x = this.stageW / 5;
             this.bird.y = this.stageH / 2;
             //this.bird.touchEnabled = true; //开启触碰
-            this.wall = new WallMap();
-            this.addChildAt(this.wall, 1);
+            this.walls = new WallMap();
+            this.addChildAt(this.walls, 1);
             this.touchEnabled = true;
+
             this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.fly, this);
             this.addEventListener(egret.Event.ENTER_FRAME, this.fall, this);
         }
@@ -171,6 +171,27 @@ module flappy_bird {
                 var y:number = this.bird.y + 3;
                 tw.to({x: this.bird.x, y: y}, 50);
             }
+            for (var i in this.walls.botWallArr) {
+                if (GameUtil.hitTest(this.bird, this.walls.botWallArr[i])) {
+                    this.gameOver();
+                }
+            }
+            for (var i in this.walls.topWallArr) {
+                if (GameUtil.hitTest(this.bird, this.walls.topWallArr[i])) {
+                    this.gameOver();
+                }
+            }
+        }
+
+        private gameOver(){
+            var gameOver = flappy_bird.createBitmapByName("gameover_png");
+            gameOver.x=this.stageW/2-90;
+            gameOver.y=this.stageH/2-120;
+            this.addChild(gameOver);
+            this.walls.pause();
+            this.bg.pause();
+            this.removeEventListener(egret.Event.ENTER_FRAME, this.fall, this);
+            this.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.fly, this);
         }
 
     }

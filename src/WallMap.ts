@@ -7,9 +7,9 @@ module flappy_bird {
      */
     export class WallMap extends egret.DisplayObjectContainer {
         /**顶部障碍*/
-        private topWallArr:egret.Bitmap[] = [];
+        public topWallArr:egret.Bitmap[] = [];
         /**底部障碍*/
-        private botWallArr:egret.Bitmap[] = [];
+        public botWallArr:egret.Bitmap[] = [];
         /**stage宽*/
         private stageW:number;
         /**stage高*/
